@@ -2,6 +2,8 @@ package com.mitocode.projectmitocodeexam.controllers;
 
 import java.util.List;
 
+import com.mitocode.projectmitocodeexam.exceptions.InternalServerException;
+import com.mitocode.projectmitocodeexam.exceptions.NotFoundException;
 import com.mitocode.projectmitocodeexam.models.Category;
 import com.mitocode.projectmitocodeexam.payload.request.CategoryCreateRequest;
 import com.mitocode.projectmitocodeexam.services.CategoryService;
@@ -25,7 +27,14 @@ public class CategoryController {
 
     @PostMapping("")
     public ResponseEntity<Category> createCategory(@RequestBody CategoryCreateRequest categoryCreateRequest){
-        Category category = categoryService.createCategory(categoryCreateRequest);
+        Category category=null;
+        try {
+            category = categoryService.createCategory(categoryCreateRequest);   
+        } catch (Exception e) {
+            throw new InternalServerException();
+        }
+
+        if(category==null) throw new InternalServerException();
 
         return new ResponseEntity<Category>(category,HttpStatus.CREATED);
     }
@@ -33,7 +42,13 @@ public class CategoryController {
     @GetMapping("")
     public ResponseEntity<List<Category>> getAll(){
         List<Category> list;
-        list = categoryService.getCategories();
+        try{
+            list = categoryService.getCategories();
+        }catch(Exception e){
+            throw new InternalServerException();
+        }
+
+        if(list == null) throw new NotFoundException();
 
         return new ResponseEntity<List<Category>>(list,HttpStatus.OK);
     }
