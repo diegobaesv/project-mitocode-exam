@@ -27,6 +27,6 @@ CREATE TABLE public.products
 CREATE TABLE public.product_category
 (
    id_category    int REFERENCES categories (id_category) ON UPDATE CASCADE ON DELETE CASCADE, 
-   id_product int REFERENCES product (id_product) ON UPDATE CASCADE,
+   id_product int REFERENCES products (id_product) ON UPDATE CASCADE,
    CONSTRAINT product_category_pkey PRIMARY KEY (id_category, id_product)  -- explicit pk
 );

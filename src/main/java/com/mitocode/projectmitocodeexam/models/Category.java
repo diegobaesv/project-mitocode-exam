@@ -7,15 +7,18 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import io.swagger.annotations.ApiModel;
+
 /*NO SE USA LOOMBOOK POR ERRORES CON INFINTY LOOP EN MANY TO MANY*/
 
 @Table(name = "categories")
 @Entity
+@ApiModel(description = "Categoria de un producto")
 public class Category {
 
     @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    private int idCategory;
+    private long idCategory;
 
     @ManyToMany(mappedBy = "categories")
     @JsonIgnore
@@ -40,7 +43,7 @@ public class Category {
         this.title = title;
     }
 
-    public int getIdCategory() {
+    public long getIdCategory() {
         return idCategory;
     }
 

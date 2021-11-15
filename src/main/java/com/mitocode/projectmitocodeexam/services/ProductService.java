@@ -10,6 +10,6 @@ public interface ProductService {
     Product createProduct(ProductCreateRequest productCreateRequest);
     List<Product> getProducts();
     Product updateProduct(ProductUpdateRequest productUpdateRequest);
-    boolean deleteProduct(int idProduct);
-    Product getOneByIdProduct(int idProduct);
+    boolean deleteProduct(long idProduct);
+    Product getOneByIdProduct(long idProduct);
 }

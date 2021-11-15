@@ -5,7 +5,6 @@ import java.util.Set;
 
 import javax.persistence.*;
 
-
 /*NO SE USA LOOMBOOK POR ERRORES CON INFINTY LOOP EN MANY TO MANY*/
 
 @Table(name = "products")
@@ -13,7 +12,7 @@ import javax.persistence.*;
 public class Product {
     @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    private int idProduct;
+    private long idProduct;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -45,6 +44,14 @@ public class Product {
       this.categories=categories;
     }
 
+    public Product(long idProduct, String title, String description, float price, Set<Category> categories){
+      this.idProduct=idProduct;
+      this.title=title;
+      this.description=description;
+      this.price=price;
+      this.categories=categories;
+    }
+
     
 
     public Product() {
@@ -52,7 +59,7 @@ public class Product {
 
 
 
-    public int getIdProduct() {
+    public long getIdProduct() {
       return idProduct;
     }
 

@@ -29,18 +29,26 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public Product updateProduct(ProductUpdateRequest productUpdateRequest) {
-        // TODO Auto-generated method stub
-        return null;
+        return  productRepository.save(new Product(productUpdateRequest.getIdProduct(), productUpdateRequest.getTitle(), 
+        productUpdateRequest.getDescription(), productUpdateRequest.getPrice(),productUpdateRequest.getCategories()));
+        //return null;
     }
 
     @Override
-    public boolean deleteProduct(int idProduct) {
-        // TODO Auto-generated method stub
-        return false;
+    public boolean deleteProduct(long idProduct) {
+        try {
+            productRepository.deleteById(idProduct);
+            return true;
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+        
+        
     }
 
     @Override
-    public Product getOneByIdProduct(int idProduct) {
+    public Product getOneByIdProduct(long idProduct) {
         return  productRepository.getOneByIdProduct(idProduct);
     }
     
